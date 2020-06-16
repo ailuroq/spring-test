@@ -26,6 +26,8 @@ public class DemoApplication {
 //        this.mail = in.nextLine();
 //        System.out.println("Введите пароль");
 //        this.password = in.nextLine();
-        user1.signUp("", "ovsyannikov","mail.@ru", "Kutuzov");
+//        user1.signUp("Даниил", "Рыбак","rybak@list.ru", "rybak"); добавление в базу
+        System.out.println(user1.signIn(3, "ryba"));
+
     }
 }

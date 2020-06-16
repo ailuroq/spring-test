@@ -5,6 +5,10 @@ import java.util.Scanner;
 
 public class User {
 
+    String url = "jdbc:postgresql://localhost:5432/postgres";
+    String user = "myuser";
+    String pass = "mypass";
+
     private int id;
     private double balance;
     private double loanBalance;
@@ -13,6 +17,7 @@ public class User {
     private String firstName;
     private String lastName;
     private boolean credit;
+    private boolean isRegistered = false;
 
     public void setId(int id) {
         this.id = id;
@@ -71,9 +76,6 @@ public class User {
     }
 
     public void signUp(String firstName, String lastName, String mail, String password) throws SQLException {
-        String url = "jdbc:postgresql://localhost:5432/postgres";
-        String user = "myuser";
-        String pass = "mypass";
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
@@ -82,8 +84,6 @@ public class User {
         Connection con = DriverManager.getConnection(url, user, pass);
         Statement statement = con.createStatement();
         statement = con.createStatement();
-        ResultSet rs;
-        rs = statement.executeQuery("SELECT * FROM users");
 
         PreparedStatement statement1 = con.prepareStatement("INSERT INTO users VALUES (nextval('users_id_seq'),?,?,?,?,?,?,?)");
         statement1.setString(1, firstName);
@@ -94,11 +94,35 @@ public class User {
         statement1.setInt(6, 0);
         statement1.setInt(7, 0);
         statement1.executeUpdate();
-
-        return;
-
-
     }
 
+    public boolean signIn(int id, String password) throws SQLException {
+        Connection con = DriverManager.getConnection(url, user, pass);
+        Statement statement = con.createStatement();
+        statement = con.createStatement();
+        ResultSet rs;
+        rs = statement.executeQuery("SELECT * FROM users WHERE id =" + id);
+        if(rs.next()) {
+            this.password = rs.getString("password");
+            if(this.password.equals(password)) {
+                isRegistered = true;
+                return true;
+            } else {
+                System.out.println("wrong password, try again");
+                return false;
+            }
+        } else {
+            System.out.println("We cant find your id, make sure you entered it right");
+            return false;
+        }
+    }
+
+    public void CreditCalculation(int id, String password) throws SQLException {
+        Connection con = DriverManager.getConnection(url, user, pass);
+        Statement statement = con.createStatement();
+        statement = con.createStatement();
+        ResultSet rs;
+        rs = statement.executeQuery("SELECT * FROM users WHERE id =" + id);
+    }
 
 }
