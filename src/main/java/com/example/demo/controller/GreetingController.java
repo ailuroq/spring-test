@@ -19,19 +19,13 @@ class GreetingController {
     }
 
     @PostMapping("/greeting")
-    public String greetingSubmit(@RequestParam String firstName,
-                                 @RequestParam String lastName, @RequestParam String mail,
-                                 @RequestParam String password, Model model) throws SQLException {
-        if(firstName.trim().length() != 0 && lastName.trim().length() != 0 && mail.trim().length() != 0 && password.trim().length() != 0) {
-            User user = new User(firstName, lastName, mail, password);
-            
+    public String greetingSubmit(@ModelAttribute("user") User user, Model model) throws SQLException {
+        model.addAttribute("firstName", user.getFirstName());
+        model.addAttribute("lastName", user.getLastName());
+        model.addAttribute("password", user.getPassword());
+        model.addAttribute("mail", user.getMail());
 //            user.signUp(firstName, lastName, mail, password);
-            return "result";
-        }
-        else{
-            System.out.println("at least one form is empty");
-            return "result";
-        }
+        return "result";
 
 
     }
