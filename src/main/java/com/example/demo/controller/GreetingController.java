@@ -4,25 +4,36 @@ package com.example.demo.controller;
 import com.example.demo.logic.user.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+
+import java.sql.SQLException;
 
 @Controller
 public
 class GreetingController {
 
-    @RequestMapping(value="/greeting", method=RequestMethod.GET)
+    @GetMapping("/greeting")
     public String greetingForm(Model model) {
         model.addAttribute("user", new User());
         return "greeting";
     }
 
-    @RequestMapping(value="/greeting", method=RequestMethod.POST)
-    public String greetingSubmit(@ModelAttribute User user, Model model) {
-        model.addAttribute("user", user);
-        return "result";
+    @PostMapping("/greeting")
+    public String greetingSubmit(@RequestParam String firstName,
+                                 @RequestParam String lastName, @RequestParam String mail,
+                                 @RequestParam String password, Model model) throws SQLException {
+        if(firstName.trim().length() != 0 && lastName.trim().length() != 0 && mail.trim().length() != 0 && password.trim().length() != 0) {
+            User user = new User(firstName, lastName, mail, password);
+            
+//            user.signUp(firstName, lastName, mail, password);
+            return "result";
+        }
+        else{
+            System.out.println("at least one form is empty");
+            return "result";
+        }
+
+
     }
 
 }

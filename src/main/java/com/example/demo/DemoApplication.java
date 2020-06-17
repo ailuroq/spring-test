@@ -16,18 +16,7 @@ public class DemoApplication {
 
     public static void main(String[] args) throws SQLException {
         SpringApplication.run(DemoApplication.class, args);
-        User user1 = new User();
-        Scanner in = new Scanner(System.in);
-//        System.out.println("Введите ваше имя");
-//        this.firstName = in.nextLine();
-//        System.out.println("Введите вашу фамилию");
-//        this.lastName = in.nextLine();
-//        System.out.println("Введите вашу почту");
-//        this.mail = in.nextLine();
-//        System.out.println("Введите пароль");
-//        this.password = in.nextLine();
-//        user1.signUp("Даниил", "Рыбак","rybak@list.ru", "rybak"); добавление в базу
-        System.out.println(user1.signIn(3, "ryba"));
+
 
     }
 }

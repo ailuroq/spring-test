@@ -19,6 +19,16 @@ public class User {
     private boolean credit;
     private boolean isRegistered = false;
 
+    public User() {
+    }
+
+    public User(String firstName, String lastName, String mail, String password) {
+        this.mail = mail;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
