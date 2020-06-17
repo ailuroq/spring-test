@@ -1,0 +1,12 @@
+.header-menu li {
+    list-style: none;
+    display:inline-block;
+
+}
+.header-menu {
+    margin-left: 70%;
+    font-size: 18px;
+}
+.header-menu li {
+    margin-left: 20px;
+}

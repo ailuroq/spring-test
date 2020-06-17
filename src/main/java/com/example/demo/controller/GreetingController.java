@@ -24,7 +24,7 @@ class GreetingController {
         model.addAttribute("lastName", user.getLastName());
         model.addAttribute("password", user.getPassword());
         model.addAttribute("mail", user.getMail());
-//            user.signUp(firstName, lastName, mail, password);
+        user.signUp(user.getFirstName(), user.getLastName(), user.getMail(), user.getPassword());
         return "result";
 
 
