@@ -9,7 +9,7 @@
 <body>
 <h1>Welcome to my banking system</h1>
 <form action="#" th:action="@{/sign-in}" th:object="${user}" method="post">
-    <p class ="form-greeting">id: <input type="number" th:field="*{id}" /></p>
+    <p class ="form-greeting">id: <input type="text" th:field="*{id}" /></p>
     <p class ="form-greeting">password: <input type="text" th:field="*{password}" /></p>
     <p class ="form_greeting"><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
 </form>

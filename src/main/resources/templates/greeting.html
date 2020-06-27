@@ -13,7 +13,7 @@
     </ul>
 </div>
 <h1>Welcome to my banking system</h1>
-    <form action="#" th:action="@{/greeting}" th:object="${user}" method="post">
+<form action="#" th:action="@{/greeting}" th:object="${user}" method="post">
     <p class ="form-greeting">firstName: <input type="text" th:field="*{firstName}" /></p>
     <p class ="form-greeting">lastName: <input type="text" th:field="*{lastName}" /></p>
     <p class ="form-greeting">mail: <input type="text" th:field="*{mail}" /></p>

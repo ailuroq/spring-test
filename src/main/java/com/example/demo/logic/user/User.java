@@ -12,6 +12,7 @@ public class User {
     private int id;
     private double balance;
     private double loanBalance;
+    private double payment;
     private String password;
     private String mail;
     private String firstName;
@@ -57,6 +58,10 @@ public class User {
         this.lastName = lastName;
     }
 
+    public void setPayment(double payment) {
+        this.payment = payment;
+    }
+
     public int getId() {
         return id;
     }
@@ -83,6 +88,9 @@ public class User {
 
     public String getLastName() {
         return lastName;
+    }
+    public double getPayment() {
+        return payment;
     }
 
     public void signUp(String firstName, String lastName, String mail, String password) throws SQLException {
@@ -127,6 +135,71 @@ public class User {
         }
     }
 
+    public String getMailFromDatabase(int id) throws SQLException {
+        Connection con = DriverManager.getConnection(url, user, pass);
+        Statement statement = con.createStatement();
+        statement = con.createStatement();
+        ResultSet rs = statement.executeQuery("SELECT * FROM users WHERE id =" + id);
+        if(rs.next()) {
+            this.mail = rs.getString("mail");
+            return this.mail;
+        } else {
+            return "We cant find your id, make sure you entered it right";
+        }
+    }
+    public String getFirstNameFromDatabase(int id) throws SQLException {
+        Connection con = DriverManager.getConnection(url, user, pass);
+        Statement statement = con.createStatement();
+        statement = con.createStatement();
+        ResultSet rs = statement.executeQuery("SELECT * FROM users WHERE id =" + id);
+        if(rs.next()) {
+            this.firstName = rs.getString("first_name");
+            return this.firstName;
+
+        } else {
+            return "We cant find your id, make sure you entered it right";
+        }
+    }
+    public String getLastNameFromDatabase(int id) throws SQLException {
+        Connection con = DriverManager.getConnection(url, user, pass);
+        Statement statement = con.createStatement();
+        statement = con.createStatement();
+        ResultSet rs = statement.executeQuery("SELECT * FROM users WHERE id =" + id);
+        if(rs.next()) {
+            this.lastName = rs.getString("last_name");
+            return  this.lastName;
+
+        } else {
+            return "We cant find your id, make sure you entered it right";
+        }
+    }
+    public String getPasswordFromDatabase(int id) throws SQLException {
+        Connection con = DriverManager.getConnection(url, user, pass);
+        Statement statement = con.createStatement();
+        statement = con.createStatement();
+        ResultSet rs = statement.executeQuery("SELECT * FROM users WHERE id =" + id);
+        if(rs.next()) {
+            this.password = rs.getString("password");
+            return  this.password;
+
+        } else {
+            return "We cant find your id, make sure you entered it right";
+        }
+    }
+    public String getCurrentBalanceFromDatabase(int id) throws SQLException {
+        Connection con = DriverManager.getConnection(url, user, pass);
+        Statement statement = con.createStatement();
+        statement = con.createStatement();
+        ResultSet rs = statement.executeQuery("SELECT * FROM users WHERE id =" + id);
+        if(rs.next()) {
+            this.password = rs.getString("password");
+            return  this.password;
+
+        } else {
+            return "We cant find your id, make sure you entered it right";
+        }
+    }
+
     public void CreditCalculation(int id, String password) throws SQLException {
         Connection con = DriverManager.getConnection(url, user, pass);
         Statement statement = con.createStatement();
@@ -135,4 +208,19 @@ public class User {
         rs = statement.executeQuery("SELECT * FROM users WHERE id =" + id);
     }
 
+    public void payIn(int id, double payment) throws SQLException {
+        Connection con = DriverManager.getConnection(url, user, pass);
+        Statement statement = con.createStatement();
+        statement = con.createStatement();
+        ResultSet rs = statement.executeQuery("SELECT * FROM users WHERE id =" + id);
+        double newBalance;
+        if(rs.next()) {
+            this.balance = rs.getDouble("cur_balance");
+            newBalance = this.balance + payment;
+            statement.executeQuery("UPDATE users SET cur_balance = " + newBalance + "WHERE id ="+ id);
+
+        } else {
+            return;
+        }
+    }
 }
