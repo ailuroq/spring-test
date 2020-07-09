@@ -10,3 +10,8 @@
 .header-menu li {
     margin-left: 20px;
 }
+.home-button {
+    position:relative;
+    margin-left:50%;
+    transform: translate(-50%, 0);
+}
